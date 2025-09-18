@@ -1,0 +1,41 @@
+# Example environment configuration for NVIDIA Riva ACR MCP Server
+
+# Server configuration
+HOST=localhost
+PORT=8000
+
+# Logging level (DEBUG, INFO, WARNING, ERROR)
+LOG_LEVEL=INFO
+
+# NVIDIA Riva server URI (default: localhost:50051)
+RIVA_URI=localhost:50051
+
+# NVIDIA Riva ASR mode (default: offline)
+# Values: offline, streaming
+# - offline: Process entire audio file at once (better for batch processing)
+# - streaming: Process audio in chunks with real-time results (better for live audio)
+RIVA_ASR_MODE=offline
+
+# NVIDIA Riva maximum alternatives (default: 3)
+# Number of alternative transcriptions to request per segment
+# Higher values provide more options but increase processing time
+# Range: 1-10 (values outside this range will be capped)
+RIVA_MAX_ALTERNATIVES=3
+
+# Authentication credentials for audio download URLs
+# Format: AUTH_<IDENTIFIER>=base_url|username:password
+# IDENTIFIER can be any descriptive name for the service
+
+# Example for a service at example.com:
+# AUTH_EXAMPLE=https://example.com|myuser:mypassword
+
+# Example for an API service:
+# AUTH_MYAPI=https://api.myservice.io:8080|apikey:secret
+
+# Example for NVIDIA Build service:
+# AUTH_NVIDIA=https://build.nvidia.com|username:password
+
+# Example for multiple services:
+# AUTH_SERVICE1=https://audio.service1.com|user1:pass1
+# AUTH_SERVICE2=https://files.service2.org|user2:pass2
+

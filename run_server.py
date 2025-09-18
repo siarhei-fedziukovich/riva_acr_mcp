@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Convenience script to run the Parakeet ACR MCP Server.
+Convenience script to run the NVIDIA Riva ACR MCP Server.
 """
 
-from src.parakeet_acr_mcp.server import main
+from src.riva_acr_mcp.server import main
 
 if __name__ == "__main__":
     main()

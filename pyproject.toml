@@ -3,22 +3,25 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "parakeet-acr-mcp"
+name = "riva-acr-mcp"
 version = "0.1.0"
-description = "A Model Context Protocol server for Parakeet ACR"
-readme = "README.md"
+description = "A Model Context Protocol server for NVIDIA Riva ASR"
+# readme = "README.md"
 requires-python = ">=3.10"
 authors = [
-    { name = "Parakeet ACR Team" }
+    { name = "NVIDIA Riva ASR Team" }
 ]
 dependencies = [
     "mcp>=1.0.0",
     "fastapi>=0.104.0",
     "uvicorn>=0.24.0",
+    "requests>=2.31.0",
+    "nvidia-riva-client>=2.14.0",
+    "pydub>=0.25.1",
 ]
 
 [project.scripts]
-parakeet-acr-mcp = "parakeet_acr_mcp.server:main"
+riva-acr-mcp = "riva_acr_mcp.server:main"
 
 [tool.uv]
 dev-dependencies = []
