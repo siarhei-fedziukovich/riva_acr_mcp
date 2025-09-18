@@ -1,5 +1,5 @@
 # NVIDIA Riva ACR MCP Server Dockerfile
-# Multi-stage build for optimized production image
+# Multi-stage build for optimized production image using pip
 
 # Build stage
 FROM python:3.11-slim as builder
@@ -13,20 +13,17 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Install uv for fast Python package management
-RUN pip install uv
-
 # Set working directory
 WORKDIR /app
 
 # Copy dependency files
-COPY pyproject.toml ./
 COPY requirements.txt ./
 
-# Install Python dependencies
-RUN uv venv /opt/venv
+# Create virtual environment and install Python dependencies
+RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-RUN uv pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
 # Production stage
 FROM python:3.11-slim as production

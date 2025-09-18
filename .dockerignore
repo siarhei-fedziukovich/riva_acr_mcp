@@ -79,4 +79,4 @@ docker-compose*.yml
 .cache/
 
 # Project specific
-.uv/
+# (removed .uv/ since we're using pip instead of uv)
