@@ -16,8 +16,10 @@ RUN apt-get update && apt-get install -y \
 # Set working directory
 WORKDIR /app
 
-# Copy dependency files
+# Copy dependency files and source code for editable install
 COPY requirements.txt ./
+COPY pyproject.toml ./
+COPY src/ ./src/
 
 # Create virtual environment and install Python dependencies
 RUN python -m venv /opt/venv
@@ -57,8 +59,9 @@ COPY --from=builder /opt/venv /opt/venv
 # Set working directory
 WORKDIR /app
 
-# Copy application code
+# Copy application code and configuration files needed for editable install
 COPY --chown=riva:riva src/ ./src/
+COPY --chown=riva:riva pyproject.toml ./
 COPY --chown=riva:riva run_server.py ./
 COPY --chown=riva:riva config.example ./
 
