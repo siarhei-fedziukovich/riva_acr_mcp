@@ -73,19 +73,19 @@ RUN mkdir -p /app/logs /app/data && \
 USER riva
 
 # Expose port
-EXPOSE 8000
+EXPOSE 8080
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-    CMD curl -f http://localhost:8000/health || exit 1
+    CMD sh -c 'curl -f http://localhost:$LISTENING_PORT/health || exit 1'
 
 # Default environment variables
-ENV HOST=0.0.0.0
-ENV PORT=8000
+ENV LISTENING_HOST=0.0.0.0
+ENV LISTENING_PORT=8080
 ENV LOG_LEVEL=INFO
 ENV RIVA_URI=localhost:50051
 ENV RIVA_ASR_MODE=offline
 ENV RIVA_MAX_ALTERNATIVES=3
 
-# Default command
-CMD ["python", "-m", "src.riva_acr_mcp.server", "--host", "0.0.0.0", "--port", "8000"]
+# Default command - use environment variables for host and port
+CMD ["sh", "-c", "python -m src.riva_acr_mcp.server --host $LISTENING_HOST --port $LISTENING_PORT"]
